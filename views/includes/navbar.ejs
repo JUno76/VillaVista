@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <a class="navbar-brand" href="/listings" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 2rem;color: red;font-weight: bold;"  >Villa Vista</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,17 +12,20 @@
 
       </div>
       <div class="search-container position-relative">
-        <form class="d-flex align-items-center" method="post" action="/search" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="search-icon feather feather-search">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input class="form-control search-input ps-5" type="search"
-                   placeholder="Search anything..." aria-label="Search" name="search">
+        <form class="d-flex align-items-center w-100" method="post" action="/search">
+            <div class="search-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="search-icon feather feather-search">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <input class="form-control search-input ps-5 flex-grow-1" type="search" placeholder="Search anything..." 
+                   aria-label="Search" name="search">
             <button class="btn btn-search ms-2" type="submit">Search</button>
         </form>
+    
     </div>
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">airbnb your home</a>
@@ -35,6 +38,7 @@
               <% } %>
       </div>
     </div>
+    </div>
   </div>
 </nav>
 
@@ -42,50 +46,43 @@
 <style>
   
 
+  .search-container {
+    max-width: 500px; /* Limits max width on larger screens */
+    width: 100%;
+    margin: 0 auto; /* Centering */
+}
+
+.search-icon-container {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-input {
+    padding-left: 40px !important; /* Adjust for the icon */
+}
+
+.btn-search {
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
     .search-container {
-        background-color: white;
-        border-radius: 50px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        max-width: 768px;
-        width: 70%;
-        transition: all 0.3s ease;
-        position: relative;
-        left: 30rem;
+        max-width: 80%;
+       
     }
-
-    .search-container:hover {
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        display: inline-block;
-    }
-
-    .form-control.search-input {
-        border: none;
-        background: transparent;
-        padding-left: 20px;
-        font-size: 1rem;
-        height: 50px;
-    }
-
-    .form-control.search-input:focus {
-        box-shadow: none;
-        outline: none;
+    
+    .search-input {
+        padding-left: 35px !important;
     }
 
     .btn-search {
-        background-color: #007bff;
-        color: white;
-        border-radius: 50px;
-        padding: 10px 20px;
-        border: none;
-        transition: all 0.3s ease;
+        padding: 6px 10px;
+        font-size: 14px;
     }
-
-    .btn-search:hover {
-        background-color: #0056b3;
-        transform: scale(1.05);
-    }
-
+}
     /* .search-icon {
         color: #6c757d;
         
