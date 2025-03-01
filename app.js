@@ -18,7 +18,8 @@ const searchRouter = require("./routes/search.js");
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
-
+const bookingRoutes = require("./routes/booking");
+const profileRoutes = require("./routes/profile");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -105,6 +106,8 @@ app.use("/listings/:id", reviewRouter);
 app.use("/", userRouter);
 app.use("/", categoryRouter);
 app.use("/search", searchRouter);
+app.use("/booking", bookingRoutes);
+app.use("/profile", profileRoutes);
 
 main()
   .then(() => {
