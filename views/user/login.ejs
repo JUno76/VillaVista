@@ -27,9 +27,22 @@
             <div style="display: inline;">
                 <form action="/login" method="POST">
                   <!-- Existing local login form -->
-                  <a href="/auth/google">
-                    <button type="button"><i class="fa-brands fa-google"></i></button>
-                  </a>
+                  <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                    <a href="/auth/google">
+                      <button
+                        type="button"
+                        data-mdb-button-init
+                        data-mdb-ripple-init
+                        class="btn btn-danger btn-floating mx-1"
+                      >
+                        <i class="fab fa-google"></i></button
+                    ></a>
+              
+                    <div class="divider d-flex align-items-center my-4">
+                      <p class="text-center fw-bold mx-3 mb-0">Or</p>
+                    </div>
+                  </div>
                 </form>
                
               </div>
