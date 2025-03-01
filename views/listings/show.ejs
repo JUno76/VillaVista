@@ -52,7 +52,230 @@
           </form>
         </div>
         <% } %>
+        <% if (!currUser) { %>
+          <a href="/login" class="btn btn-primary">Book Now</a>
+      <% } else { %>
+        <button class="btn btn-success" onclick="openReserveModal()">Book Now</button>
 
+      <% } %>
+
+      <h6>Features:</h6>
+       <div class="row">
+       <!-- Left column -->
+       <div class="col-6">
+       <ul style="list-style-type: none;">
+       <% listing.features.slice(0, Math.ceil(listing.features.length / 2)).forEach(function(feature) { %>
+        <li>
+          <% if (feature === "Free Parking") { %>
+            <i class="fa-solid fa-car"></i>
+          <% } else if (feature === "WiFi") { %>
+            <i class="fa-solid fa-wifi"></i>
+          <% } else if (feature === "Hot Water") { %>
+            <i class="fa-solid fa-tint"></i>
+          <% } else if (feature === "24 hrs Electricity") { %>
+            <i class="fa-solid fa-bolt"></i>
+          <% } else if (feature === "Security Guard") { %>
+            <i class="fa-solid fa-shield-halved"></i>
+          <% } else if (feature === "Balcony") { %>
+            <i class="fa-solid fa-tree"></i>
+          <% } else if (feature === "Kitchen") { %>
+            <i class="fa-solid fa-utensils"></i>
+          <% } else if (feature === "Gym") { %>
+            <i class="fa-solid fa-dumbbell"></i>
+          <% } else if (feature === "Furniture") { %>
+            <i class="fa-solid fa-couch"></i>
+          <% } %>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;<%= feature %></span>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- Right column -->
+  <div class="col-6">
+    <ul style="list-style-type: none;">
+      <% listing.features.slice(Math.ceil(listing.features.length / 2)).forEach(function(feature) { %>
+        <li>
+          <% if (feature === "Free Parking") { %>
+            <i class="fa-solid fa-car"></i>
+          <% } else if (feature === "WiFi") { %>
+            <i class="fa-solid fa-wifi"></i>
+          <% } else if (feature === "Hot Water") { %>
+            <i class="fa-solid fa-tint"></i>
+          <% } else if (feature === "24 hrs Electricity") { %>
+            <i class="fa-solid fa-bolt"></i>
+          <% } else if (feature === "Security Guard") { %>
+            <i class="fa-solid fa-shield-halved"></i>
+          <% } else if (feature === "Balcony") { %>
+            <i class="fa-solid fa-tree"></i>
+          <% } else if (feature === "Kitchen") { %>
+            <i class="fa-solid fa-utensils"></i>
+          <% } else if (feature === "Gym") { %>
+            <i class="fa-solid fa-dumbbell"></i>
+          <% } else if (feature === "Furniture") { %>
+            <i class="fa-solid fa-couch"></i>
+          <% } %>
+         <span> &nbsp;&nbsp;&nbsp;&nbsp;<%= feature %></span>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+      
+    
+
+      <div id="reserveModal" class="reserve-modal" style="display: none;">
+        <div class="reserve-modal-content">
+            <span class="reserve-close" onclick="closeReserveModal()">&times;</span>
+            <h3>Reserve Your Stay</h3>
+            <form action="/booking/<%= listing._id %>" method="POST" class="reserve-form">
+                <label for="checkIn">Check-In Date:</label>
+                <input type="date" id="checkIn" name="startDate" class="reserve-input" required>
+      
+                <label for="checkOut">Check-Out Date:</label>
+                <input type="date" id="checkOut" name="endDate" class="reserve-input" required>
+      
+                <button type="submit" class="reserve-btn">Confirm Reservation</button>
+            </form>
+        </div>
+      </div>
+      
+   
+      <style>
+      /* Main "Book Now" Button */
+      .open-modal-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease-in-out;
+      }
+      
+      .open-modal-btn:hover {
+        background-color: #0056b3;
+      }
+      
+      /* Reserve Modal Wrapper (Initially Hidden) */
+      .reserve-modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* Reserve Modal Content */
+      .reserve-modal-content {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 12px;
+        width: 420px;
+        max-width: 90%;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+      
+      /* Close Button */
+      .reserve-close {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 26px;
+        cursor: pointer;
+        color: #333;
+      }
+      
+      /* Form Styling */
+      .reserve-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .reserve-form label {
+        font-weight: 600;
+        text-align: left;
+        display: block;
+        margin-bottom: 6px;
+        color: #444;
+      }
+      
+      /* Input Fields */
+      .reserve-input {
+        padding: 10px;
+        border: 2px solid #ced4da;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: #fff;
+        transition: border 0.3s ease-in-out;
+      }
+      
+      .reserve-input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+      
+      /* Confirm Booking Button */
+      .reserve-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease-in-out;
+      }
+      
+      .reserve-btn:hover {
+        background-color: #218838;
+      }
+      </style>
+      
+      <!-- JavaScript -->
+      <script>
+        // Open the modal when "Book Now" is clicked
+        function openReserveModal() {
+            let modal = document.getElementById("reserveModal");
+            modal.style.display = "flex";  // Show the modal
+            document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+        }
+      
+        // Close the modal when clicking the close button
+        function closeReserveModal() {
+            let modal = document.getElementById("reserveModal");
+            modal.style.display = "none";  // Hide the modal
+            document.body.style.overflow = "auto"; // Restore scrolling
+        }
+      
+        // Close modal if clicking outside the modal content
+        window.onclick = function(event) {
+            let modal = document.getElementById("reserveModal");
+            if (event.target === modal) {
+                closeReserveModal();
+            }
+        };
+      
+        // Close modal when pressing "Esc" key
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeReserveModal();
+            }
+        });
+      </script>
+      
     </div>
     <div class="col-8 offset-2 mt-3 mb-3">
       <hr>
