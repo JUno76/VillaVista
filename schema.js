@@ -11,7 +11,7 @@ module.exports.listingSchema=Joi.object({
         country:Joi.string().required(),
         image:Joi.string().allow("",null),
         category:Joi.string(),
-
+        features: Joi.array().items(Joi.string())
 
     }).required(),
 
